@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use Carbon\Carbon;
 
 class Faktur extends Model
 {
@@ -16,9 +19,27 @@ class Faktur extends Model
         'tanggal_jatuh_tempo',
     ];
 
+    
  
     public function distributor()
     {
         return $this->belongsTo(Distributor::class);
+    }
+
+    public function getStatusAttribute()
+    {
+        $hariIni = Carbon::today();
+        $jatuhTempo = Carbon::parse($this->tanggal_jatuh_tempo);
+
+        $sisaHari = $hariIni->diffInDays($jatuhTempo, false);
+        if ($sisaHari <= 3) {
+            return 'Darurat';
+        }
+
+        if ($sisaHari <= 7) {
+            return 'Dipantau';
+        }
+
+        return 'Aman';
     }
 }
