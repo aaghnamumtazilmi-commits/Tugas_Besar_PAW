@@ -16,7 +16,7 @@ class Faktur extends Model
         'tanggal_jatuh_tempo',
     ];
 
-    // Relasi: Faktur milik satu Distributor
+ 
     public function distributor()
     {
         return $this->belongsTo(Distributor::class);
