@@ -13,22 +13,19 @@ class FakturController extends Controller
     public function index(Request $request)
     {
         $today = Carbon::today();
-
         $query = Faktur::with('distributor');
 
         if ($request->status == 'darurat') {
-            $query->whereDate('tanggal_jatuh_tempo', '<=', $today);
+            $query->whereDate('tanggal_jatuh_tempo', '<=', $today->copy()->addDays(3));
         }
 
         if ($request->status == 'dipantau') {
-            $query->whereBetween('tanggal_jatuh_tempo', [
-                $today->copy()->addDay(),
-                $today->copy()->addDays(7)
-            ]);
+            $query->whereDate('tanggal_jatuh_tempo', '>', $today->copy()->addDays(3))
+                ->whereDate('tanggal_jatuh_tempo', '<', $today->copy()->addDays(14));
         }
 
         if ($request->status == 'aman') {
-            $query->whereDate('tanggal_jatuh_tempo', '>', $today->copy()->addDays(7));
+            $query->whereDate('tanggal_jatuh_tempo', '>=', $today->copy()->addDays(14));
         }
 
         $fakturs = $query
@@ -101,5 +98,12 @@ class FakturController extends Controller
         Faktur::findOrFail($faktur->id);
         $faktur->delete();
         return back()->with('success', 'Faktur berhasil dihapus');
+    }
+
+
+    public function show($id)
+    {
+        $faktur = Faktur::with('distributor')->findOrFail($id);
+        return view('faktur.showFaktur', compact('faktur'));
     }
 }

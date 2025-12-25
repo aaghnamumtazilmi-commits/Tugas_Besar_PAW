@@ -63,13 +63,13 @@
                 </label>
                 <div class="relative">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-                        Rp
+                        
                     </span>
                     <input type="number"
                            name="tagihan"
                            value="{{ old('tagihan') }}"
                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
-                           placeholder="Masukkan jumlah tagihan">
+                           placeholder="Rp">
                 </div>
                 @error('tagihan')
                     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
@@ -96,12 +96,12 @@
         {{-- BUTTON --}}
         <div class="flex justify-end gap-4 mt-14">
             <button type="submit"
-                    class="px-10 py-3 rounded-lg bg-navy text-white font-semibold hover:opacity-90 transition">
+                    class="w-32 py-2 rounded-lg bg-navy text-white font-semibold hover:opacity-90 transition flex justify-center items-center">
                 Simpan
             </button>
 
             <a href="{{ route('faktur.index') }}"
-               class="px-8 py-3 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition">
+               class="w-32 py-2 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition flex justify-center items-center">
                 Batal
             </a>
 

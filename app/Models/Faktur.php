@@ -32,14 +32,13 @@ class Faktur extends Model
         $jatuhTempo = Carbon::parse($this->tanggal_jatuh_tempo);
 
         $sisaHari = $hariIni->diffInDays($jatuhTempo, false);
+
         if ($sisaHari <= 3) {
             return 'Darurat';
-        }
-
-        if ($sisaHari <= 7) {
+        } elseif($sisaHari < 14) {
             return 'Dipantau';
+        } else {
+            return 'Aman';
         }
-
-        return 'Aman';
     }
 }
