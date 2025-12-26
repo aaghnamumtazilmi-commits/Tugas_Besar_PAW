@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- sesuaikan dengan nama file template utama kamu --}}
+@extends('layouts.app') 
 
 @section('page_title', 'Data Pengguna')
 
@@ -16,22 +16,23 @@
     </div>
 
     <div class="overflow-x-auto">
-        <table class="w-full text-sm border-collapse">
+        <table class="w-full table-fixed text-sm">
             <thead>
                 <tr class="text-left text-gray-500 border-b">
-                    <th class="pb-3">Nama</th>
-                    <th class="pb-3">Email</th>
-                    <th class="pb-3">Role</th>
-                    <th class="pb-3 text-center">Aksi</th>
+                    <th class="px-4 py-3 text-center">Nama</th>
+                    <th class="px-4 py-3 text-center">Email</th>
+                    <th class="px-4 py-3 text-center">Role</th>
+                    <th class="px-4 py-5 text-center">Aksi</th>
                 </tr>
             </thead>
+
             <tbody class="text-gray-700">
                 @foreach($users as $user)
                 <tr class="border-b last:border-none">
-                    <td class="py-4">{{ $user->name }}</td>
-                    <td class="py-4">{{ $user->email }}</td>
-                    <td class="py-4 capitalize">{{ $user->role }}</td>
-                    <td class="py-4 text-center space-x-2">
+                    <td class="px-4 py-3 text-center">{{ $user->name }}</td>
+                    <td class="px-4 py-3 text-center">{{ $user->email }}</td>
+                    <td class="px-4 py-5 text-center">{{ $user->role }}</td>
+                    <td class="px-4 py-5 text-center space-x-3">
 
                         <a href="{{ route('pengguna.edit', $user->id) }}"
                            class="text-blue-500 hover:text-blue-700">

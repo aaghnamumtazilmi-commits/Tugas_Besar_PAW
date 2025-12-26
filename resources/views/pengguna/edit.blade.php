@@ -3,8 +3,8 @@
 @section('page_title', 'Edit Pengguna')
 
 @section('content')
-
-<div class="bg-white rounded-2xl shadow-sm p-8 max-w-xl">
+<div class="flex justify-center">
+<div class="bg-white rounded-2xl shadow-sm p-8 max-w-3xl w-full">
 
 <form action="{{ route('pengguna.update', $user->id) }}" method="POST" class="space-y-5">
 @csrf
@@ -34,8 +34,8 @@
 </div>
 
 <div class="flex justify-end gap-3">
+    <button class="bg-navy text-white px-6 py-2 rounded-xl">Simpan</button>
     <a href="{{ route('pengguna.index') }}" class="px-5 py-2 border rounded-xl">Batal</a>
-    <button class="bg-navy text-white px-6 py-2 rounded-xl">Update</button>
 </div>
 
 </form>
