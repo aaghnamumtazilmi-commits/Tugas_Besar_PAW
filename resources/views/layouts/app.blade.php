@@ -58,20 +58,24 @@
                 <i class="fas fa-pills w-10 text-xl"></i>
                 <span>Daftar Obat</span>
             </a>
-
+            
+        @if(auth()->user()->role === 'owner')
             <a href="{{ url('/faktur') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('faktur*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-file-invoice w-10 text-xl"></i>
                 <span>Daftar Faktur</span>
             </a>
+        @endif
 
+        @if(auth()->user()->role === 'owner')
             <a href="{{ url('/distributor') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('distributor*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-truck w-10 text-xl"></i>
                 <span>Distributor</span>
             </a>
+        @endif
 
         @if(auth()->user()->role === 'owner')
             <a href="{{ url('/pengguna') }}"
