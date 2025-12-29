@@ -15,6 +15,17 @@ class FakturController extends Controller
         $today = Carbon::today();
         $query = Faktur::with('distributor');
 
+        if ($request->has('search') && trim($request->search) !== '') {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                ->orWhereHas('distributor', function ($d) use ($search) {
+                    $d->where('nama_distributor', 'like', "%{$search}%");
+                });
+            });
+        }
+
         if ($request->status == 'darurat') {
             $query->whereDate('tanggal_jatuh_tempo', '<=', $today->copy()->addDays(3));
         }

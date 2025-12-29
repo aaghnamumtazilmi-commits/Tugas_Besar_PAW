@@ -5,26 +5,51 @@
 
 @section('content')
 
-<div class="flex items-center justify-start mb-6 gap-4">
+<div class="flex items-center justify-start mb-6">
+    <div class="flex items-center gap-4">
+        {{-- TOMBOL TAMBAH --}}
+        <a href="{{ route('faktur.create') }}"
+            class="bg-navy text-white rounded-lg shadow hover:opacity-90 transition flex justify-center items-center px-4 h-10 min-w-[150px]">
+            + Tambah Faktur
+        </a>
 
-    {{-- TOMBOL TAMBAH --}}
-    <a href="{{ route('faktur.create') }}"
-        class="bg-navy text-white rounded-lg shadow hover:opacity-90 transition flex justify-center items-center px-4 h-10 min-w-[150px]">
-        + Tambah Faktur
-    </a>
+        {{-- FILTER + SEARCH --}}
+        <form method="GET" action="{{ route('faktur.index') }}"
+            class="flex items-center gap-4">
 
-    {{-- FILTER STATUS --}}
-    <form method="GET" action="{{ route('faktur.index') }}">
-        <select name="status"
-                onchange="this.form.submit()"
-                class="rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition px-4 h-10 min-w-[150px]">
-            <option value="">Semua Status</option>
-            <option value="aman" {{ request('status') == 'aman' ? 'selected' : '' }}>Aman</option>
-            <option value="dipantau" {{ request('status') == 'dipantau' ? 'selected' : '' }}>Dipantau</option>
-            <option value="darurat" {{ request('status') == 'darurat' ? 'selected' : '' }}>Darurat</option>
-        </select>
-    </form>
+            {{-- FILTER STATUS --}}
+            <select name="status"
+                    onchange="this.form.submit()"
+                    class="rounded-lg border border-gray-300 text-sm px-4 h-10
+                        focus:outline-none focus:ring-2 focus:ring-blue-400
+                        min-w-[150px]">
+                <option value="">Semua Status</option>
+                <option value="aman" {{ request('status') == 'aman' ? 'selected' : '' }}>Aman</option>
+                <option value="dipantau" {{ request('status') == 'dipantau' ? 'selected' : '' }}>Dipantau</option>
+                <option value="darurat" {{ request('status') == 'darurat' ? 'selected' : '' }}>Darurat</option>
+            </select>
 
+            {{-- SEARCH --}}
+            <div class="relative">
+                <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5
+                                a7.5 7.5 0 0013.15 13.15z"/>
+                    </svg>
+                </span>
+
+                <input type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Cari ID Faktur / Distributor"
+                    class="pl-10 pr-4 h-10 w-96 border rounded-lg text-sm
+                            focus:ring-blue-400 focus:outline-none"
+                    oninput="if(this.value === '') this.form.submit()">
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="bg-white rounded-xl shadow p-4">
