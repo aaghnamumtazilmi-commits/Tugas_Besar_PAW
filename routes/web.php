@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\FakturController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -14,9 +15,24 @@ Route::get('/', function(){
 Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
-Route::resource('pengguna', PenggunaController::class);
 
 Route::middleware(['auth', 'role:owner'])->group(function () {
-    Route::resource('pengguna', PenggunaController::class);});
+    Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
+    Route::get('/create', [PenggunaController::class, 'create'])->name('pengguna.create');
+    Route::post('/', [PenggunaController::class, 'store'])->name('pengguna.store');
+    Route::get('/{pengguna}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
+    Route::put('/{pengguna}', [PenggunaController::class, 'update'])->name('pengguna.update');
+    Route::delete('/{pengguna}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
+});
 
 
+
+Route::prefix('faktur')->group(function () {
+    Route::get('/', [FakturController::class, 'index'])->name('faktur.index');
+    Route::get('/create', [FakturController::class, 'create'])->name('faktur.create');
+    Route::post('/', [FakturController::class, 'store'])->name('faktur.store');
+    Route::get('/{faktur}/show', [FakturController::class, 'show'])->name('faktur.show');
+    Route::get('/{faktur}/edit', [FakturController::class, 'edit'])->name('faktur.edit');
+    Route::put('/{faktur}', [FakturController::class, 'update'])->name('faktur.update');
+    Route::delete('/{faktur}', [FakturController::class, 'destroy'])->name('faktur.destroy');
+});
