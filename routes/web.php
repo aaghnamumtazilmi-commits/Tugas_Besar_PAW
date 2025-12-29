@@ -14,3 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/dashboard', fn () => view('dashboard'));
+
+
+// DAFTAR FAKTUR
+use App\Http\Controllers\FakturController;
+
+Route::prefix('faktur')->group(function () {
+    Route::get('/', [FakturController::class, 'index'])->name('faktur.index');
+    Route::get('/create', [FakturController::class, 'create'])->name('faktur.create');
+    Route::post('/', [FakturController::class, 'store'])->name('faktur.store');
+    Route::get('/{faktur}/show', [FakturController::class, 'show'])->name('faktur.show');
+    Route::get('/{faktur}/edit', [FakturController::class, 'edit'])->name('faktur.edit');
+    Route::put('/{faktur}', [FakturController::class, 'update'])->name('faktur.update');
+    Route::delete('/{faktur}', [FakturController::class, 'destroy'])->name('faktur.destroy');
+});
