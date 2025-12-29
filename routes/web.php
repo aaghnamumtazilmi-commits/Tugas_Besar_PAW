@@ -13,4 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', fn () => view('dashboard'));
+
+use App\Http\Controllers\DistributorController;
+
+Route::get('/', function () {
+    return redirect()->route('distributors.index');
+});
+
+Route::resource('distributors', DistributorController::class);
