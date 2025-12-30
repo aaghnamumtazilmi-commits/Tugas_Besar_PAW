@@ -11,7 +11,7 @@
 @method('PUT')
 
 @foreach([
-    'kode_obat'=>'Kode Obat',
+
     'nama_obat'=>'Nama Obat',
     'kategori'=>'Kategori',
     'stok'=>'Stok',

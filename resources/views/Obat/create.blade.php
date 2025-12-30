@@ -13,23 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('obat.store') }}" method="POST" class="grid grid-cols-2 gap-6">
-        @csrf
-
-        {{-- KODE OBAT --}}
-        <div>
-            <label class="text-sm font-medium">
-                Kode Obat <span class="text-red-500">*</span>
-            </label>
-            <input
-                type="text"
-                name="kode_obat"
-                value="{{ old('kode_obat') }}"
-                required
-                class="border rounded-lg px-4 py-2 w-full"
-                placeholder="Contoh: OBT-001">
-        </div>
-        
+   
         {{-- NAMA OBAT --}}
         <div>
             <label class="text-sm font-medium">

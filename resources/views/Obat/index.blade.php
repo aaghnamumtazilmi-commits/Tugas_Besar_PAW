@@ -62,9 +62,10 @@
             <table class="w-full text-sm">
 
                 {{-- HEADER TABEL --}}
+
                 <thead>
                     <tr class="border-b text-left text-gray-500">
-                        <th class="py-3">Kode Obat</th>
+                        <th class="py-3">ID Obat</th>
                         <th>Nama Obat</th>
                         <th>Kategori</th>
                         <th>Tanggal Masuk</th>
@@ -75,63 +76,60 @@
                 </thead>
 
                 {{-- ISI TABEL --}}
+               
                 <tbody>
                 @foreach($obats as $obat)
+                <tr class="border-b hover:bg-blue-50">
 
-                    {{-- WARNA STATUS --}}
+                    {{-- ID OBAT --}}
+                    <td class="py-3 font-semibold">{{ $obat->id }}</td>
+
+                    {{-- NAMA --}}
+                    <td>{{ $obat->nama_obat }}</td>
+
+                    {{-- KATEGORI --}}
+                    <td>{{ $obat->kategori }}</td>
+
+                    {{-- TANGGAL MASUK --}}
+                    <td>{{ \Carbon\Carbon::parse($obat->tanggal_masuk)->format('d-m-Y') }}</td>
+
+                    {{-- STATUS --}}
                     @php
-                        $statusClass = match($obat->status) {
+                        $warna = match($obat->status) {
                             'Aman' => 'bg-green-100 text-green-700',
                             'Diperiksa' => 'bg-yellow-100 text-yellow-700',
                             default => 'bg-red-100 text-red-700'
                         };
                     @endphp
+                    <td>
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $warna }}">
+                            {{ $obat->status }}
+                        </span>
+                    </td>
 
-                    <tr class="border-b hover:bg-blue-50">
-                        <td class="py-3 font-medium">{{ $obat->kode_obat }}</td>
-                        <td>{{ $obat->nama_obat }}</td>
-                        <td>{{ $obat->kategori }}</td>
-                        <td>{{ \Carbon\Carbon::parse($obat->tanggal_masuk)->format('d-m-Y') }}</td>
+                    {{-- TGL KADALUARSA --}}
+                    <td class="text-gray-700">
+                        {{ \Carbon\Carbon::parse($obat->tanggal_kadaluarsa)->format('d-m-Y') }}
+                    </td>
 
-                        {{-- STATUS --}}
-                        <td>
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $statusClass }}">
-                                {{ $obat->status }}
-                            </span>
-                        </td>
+                    {{-- AKSI --}}
+                    <td class="flex justify-center gap-4 py-3 text-lg">
+                        <a href="{{ route('obat.show',$obat) }}" class="text-gray-600 hover:text-navy">
+                            <i class="far fa-eye"></i>
+                        </a>
 
-                        {{-- TANGGAL KADALUARSA --}}
-                        <td class="text-gray-700">
-                            {{ \Carbon\Carbon::parse($obat->tanggal_kadaluarsa)->format('d-m-Y') }}
-                        </td>
+                        <a href="{{ route('obat.edit',$obat) }}" class="text-blue-600 hover:text-blue-800">
+                            <i class="far fa-pen-to-square"></i>
+                        </a>
 
-                        {{-- AKSI --}}
-                        <td class="flex justify-center gap-4 py-3 text-lg">
-
-                            {{-- DETAIL --}}
-                            <a href="{{ route('obat.show',$obat) }}"
-                               class="text-gray-600 hover:text-navy">
-                                <i class="far fa-eye"></i>
-                            </a>
-
-                            {{-- EDIT (BIRU) --}}
-                            <a href="{{ route('obat.edit',$obat) }}"
-                               class="text-blue-600 hover:text-blue-800">
-                                <i class="far fa-pen-to-square"></i>
-                            </a>
-
-                            {{-- DELETE --}}
-                            <form action="{{ route('obat.destroy',$obat) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button onclick="return confirm('Yakin ingin menghapus obat ini?')"
-                                        class="text-red-500 hover:text-red-700">
-                                    <i class="far fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-
+                        <form action="{{ route('obat.destroy',$obat) }}" method="POST">
+                            @csrf @method('DELETE')
+                            <button onclick="return confirm('Hapus obat ini?')" class="text-red-500">
+                                <i class="far fa-trash-can"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
                 @endforeach
                 </tbody>
             </table>
