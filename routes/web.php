@@ -4,17 +4,20 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\FakturController;
+use App\Http\Controllers\DistributorController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/login', function(){
-    return view('login');
-})->name('login');
 
 Route::get('/', function(){
     return redirect()->route('login');
 });
+
+Route::get('/login', function(){
+    return view('login');
+})->name('login');
+
 
 Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
@@ -39,4 +42,20 @@ Route::prefix('faktur')->group(function () {
     Route::get('/{faktur}/edit', [FakturController::class, 'edit'])->name('faktur.edit');
     Route::put('/{faktur}', [FakturController::class, 'update'])->name('faktur.update');
     Route::delete('/{faktur}', [FakturController::class, 'destroy'])->name('faktur.destroy');
+});
+
+
+// Route::get('/', function () {
+//     return redirect()->route('distributors.index');
+// });
+
+// Route::resource('distributors', DistributorController::class);
+
+Route::prefix('distributors')->group(function () {
+    Route::get('/', [DistributorController::class, 'index'])->name('distributors.index');
+    Route::get('/create', [DistributorController::class, 'create'])->name('distributors.create');
+    Route::post('/', [DistributorController::class, 'store'])->name('distributors.store');
+    Route::get('/{distributor}/edit', [DistributorController::class, 'edit'])->name('distributors.edit');
+    Route::put('/{distributor}', [DistributorController::class, 'update'])->name('distributors.update');
+    Route::delete('/{distributor}', [DistributorController::class, 'destroy'])->name('distributors.destroy');
 });
