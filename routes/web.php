@@ -1,27 +1,51 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\FakturController;
 use App\Http\Controllers\DistributorController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+
+
 
 // Route::get('/', function () {
-//     return view('welcome');
-// });
+    //     return view('welcome');
+    // });
+    
+    Route::get('/', function(){
+        return redirect()->route('login');
+    });
+    
+    Route::get('/login', function(){
+        return view('login');
+    })->name('login');
+    
+    
+    Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    
 
-Route::get('/', function(){
-    return redirect()->route('login');
+Route::prefix('obat')->group(function () {
+    Route::get('/', [ObatController::class, 'index'])->name('obat.index');
+    Route::get('/create', [ObatController::class, 'create'])->name('obat.create');
+    Route::post('/', [ObatController::class, 'store'])->name('obat.store');
+    Route::get('/{obat}/show', [ObatController::class, 'show'])->name('obat.show');
+    Route::get('/{obat}/edit', [ObatController::class, 'edit'])->name('obat.edit');
+    Route::put('/{obat}', [ObatController::class, 'update'])->name('obat.update');
+    Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('obat.destroy');
 });
-
-Route::get('/login', function(){
-    return view('login');
-})->name('login');
-
-
-Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-
 
 Route::middleware(['auth', 'role:owner'])->prefix('pengguna')->group(function () {
     Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
