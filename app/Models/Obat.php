@@ -10,6 +10,8 @@ class Obat extends Model
 {
     use HasFactory;
 
+    
+
     /**
      * Kolom yang boleh diisi melalui mass assignment
      * ID TIDAK perlu ditulis karena auto increment

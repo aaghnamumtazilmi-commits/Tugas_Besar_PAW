@@ -9,11 +9,18 @@
     {{-- PESAN ERROR --}}
     @if ($errors->any())
         <div class="mb-6 bg-red-100 text-red-700 p-4 rounded-lg">
-            {{ $errors->first() }}
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
 
-   
+    <!-- ✅ TAMBAHKAN METHOD DAN ACTION -->
+    <form action="{{ route('obat.store') }}" method="POST">
+        @csrf
+        
         {{-- NAMA OBAT --}}
         <div>
             <label class="text-sm font-medium">
@@ -26,6 +33,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan nama obat">
+            @error('nama_obat')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- KATEGORI --}}
@@ -40,6 +50,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan kategori">
+            @error('kategori')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- JUMLAH STOK --}}
@@ -54,6 +67,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan jumlah stok">
+            @error('stok')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- LETAK RAK --}}
@@ -68,6 +84,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan letak rak">
+            @error('letak_rak')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- HARGA MODAL --}}
@@ -82,6 +101,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan harga modal">
+            @error('harga_modal')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- HARGA JUAL --}}
@@ -96,6 +118,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Masukkan harga jual">
+            @error('harga_jual')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- SATUAN JUAL --}}
@@ -110,6 +135,9 @@
                 required
                 class="border rounded-lg px-4 py-2 w-full"
                 placeholder="Contoh: Strip / Botol">
+            @error('satuan_jual')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- TANGGAL MASUK --}}
@@ -123,6 +151,9 @@
                 value="{{ old('tanggal_masuk') }}"
                 required
                 class="border rounded-lg px-4 py-2 w-full">
+            @error('tanggal_masuk')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- TANGGAL KADALUARSA --}}
@@ -136,6 +167,9 @@
                 value="{{ old('tanggal_kadaluarsa') }}"
                 required
                 class="border rounded-lg px-4 py-2 w-full">
+            @error('tanggal_kadaluarsa')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         {{-- TOMBOL --}}
