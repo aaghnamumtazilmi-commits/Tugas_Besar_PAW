@@ -18,6 +18,16 @@ class AuthController extends Controller
         }
         return redirect()->route('login')->with('error', 'email atau password salah');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); // mengeluarkan user
+
+        $request->session()->invalidate(); // hapus session
+        $request->session()->regenerateToken(); // refresh CSRF
+
+        return redirect('/login'); // kembali ke halaman login
+    }
    
    public function dashboard()
 {

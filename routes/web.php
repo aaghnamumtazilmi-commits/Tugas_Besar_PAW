@@ -31,10 +31,17 @@ use App\Http\Controllers\DistributorController;
     Route::get('/login', function(){
         return view('login');
     })->name('login');
+
+    Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    });
     
     
     Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
 
 Route::prefix('obat')->group(function () {
@@ -47,7 +54,7 @@ Route::prefix('obat')->group(function () {
     Route::delete('/{obat}', [ObatController::class, 'destroy'])->name('obat.destroy');
 });
 
-Route::middleware(['auth', 'role:owner'])->prefix('pengguna')->group(function () {
+Route::prefix('pengguna')->group(function () {
     Route::get('/', [PenggunaController::class, 'index'])->name('pengguna.index');
     Route::get('/create', [PenggunaController::class, 'create'])->name('pengguna.create');
     Route::post('/', [PenggunaController::class, 'store'])->name('pengguna.store');
