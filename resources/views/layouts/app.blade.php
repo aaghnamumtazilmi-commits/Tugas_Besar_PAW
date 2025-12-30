@@ -69,7 +69,7 @@
         @endif
 
         @if(auth()->user()->role === 'owner')
-            <a href="{{ url('/distributor') }}"
+            <a href="{{ url('/distributors') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('distributor*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-truck w-10 text-xl"></i>
