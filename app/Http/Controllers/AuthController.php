@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Http\Request;
 use App\Models\Faktur;
+use App\Models\Obat;
 
 
 
@@ -29,7 +30,12 @@ class AuthController extends Controller
         })
         ->take(5);
 
-    return view('dashboard', compact('fakturs'));
+    $obats = Obat::all()
+        ->filter(fn ($o) => in_array($o->status, ['Darurat', 'Diperiksa']))
+        ->take(5);
+
+    return view('dashboard', compact('fakturs', 'obats'));
+    
 }
 
 }
