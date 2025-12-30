@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ObatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/dashboard', fn () => view('dashboard'));
+Route::resource('obat', ObatController::class);
