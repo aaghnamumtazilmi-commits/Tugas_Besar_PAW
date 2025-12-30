@@ -58,27 +58,33 @@
                 <i class="fas fa-pills w-10 text-xl"></i>
                 <span>Daftar Obat</span>
             </a>
-
+            
+        @if(auth()->user()->role === 'owner')
             <a href="{{ url('/faktur') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('faktur*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-file-invoice w-10 text-xl"></i>
                 <span>Daftar Faktur</span>
             </a>
+        @endif
 
-            <a href="{{ url('/distributor') }}"
+        @if(auth()->user()->role === 'owner')
+            <a href="{{ url('/distributors') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('distributor*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-truck w-10 text-xl"></i>
                 <span>Distributor</span>
             </a>
+        @endif
 
+        @if(auth()->user()->role === 'owner')
             <a href="{{ url('/pengguna') }}"
                class="flex items-center p-4 rounded-xl transition
                {{ request()->is('pengguna*') ? 'bg-navy text-white shadow-lg shadow-blue-200' : 'text-gray-400 hover:bg-blue-50' }}">
                 <i class="fas fa-users w-10 text-xl"></i>
                 <span>Pengguna</span>
             </a>
+        @endif
 
             {{-- KELUAR --}}
             <a href="{{ url('/logout') }}"
@@ -86,7 +92,7 @@
                 <i class="fas fa-right-from-bracket w-10 text-xl"></i>
                 <span>Keluar</span>
             </a>
-
+        
         </nav>
     </aside>
 
@@ -99,9 +105,14 @@
                 <div class="h-10 w-px bg-white/30"></div>
 
                 <div class="flex items-center gap-4">
-                    <div class="text-right">
-                        <p class="text-sm font-bold">Elysia (Owner)</p>
-                        <p class="text-xs opacity-80">elysia1234@gmail.com</p>
+                    <div class="user-info">
+                        <span class="text-sm font-bold">
+                            {{ Auth::user()->name }} ({{ Auth::user()->role }})
+                        </span>
+                        <br>
+                        <span class="text-xs opacity">
+                            {{ Auth::user()->email }}
+                        </span>
                     </div>
                     <div class="w-11 h-11 rounded-full bg-white/20 border border-white/30 flex items-center justify-center">
                         <i class="far fa-user"></i>
