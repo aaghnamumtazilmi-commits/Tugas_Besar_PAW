@@ -7,7 +7,7 @@
 <div class="bg-white rounded-xl p-8 shadow max-w-3xl mx-auto">
 
     <div class="grid grid-cols-2 gap-4 text-sm">
-        <p><b>Kode Obat:</b> {{ $obat->kode_obat }}</p>
+        <p><b>Id Obat:</b> {{ $obat->id }}</p>
         <p><b>Nama Obat:</b> {{ $obat->nama_obat }}</p>
         <p><b>Kategori:</b> {{ $obat->kategori }}</p>
         <p><b>Stok:</b> {{ $obat->stok }}</p>

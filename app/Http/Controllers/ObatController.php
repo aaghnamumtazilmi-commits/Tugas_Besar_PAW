@@ -13,7 +13,7 @@ class ObatController extends Controller
     public function index(Request $request)
     {
         // Ambil semua obat, urut terbaru
-        $obats = Obat::latest()->get();
+        $obats = Obat::orderBy('id','asc')->get();
 
         // 🔍 SEARCH nama obat (collection)
         if ($request->filled('search')) {
