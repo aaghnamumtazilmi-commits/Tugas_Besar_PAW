@@ -32,6 +32,8 @@ use App\Http\Controllers\DistributorController;
         return view('login');
     })->name('login');
 
+    Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
+    
     Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
@@ -39,9 +41,7 @@ use App\Http\Controllers\DistributorController;
     });
     
     
-    Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
-    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    
     
 
 Route::prefix('obat')->group(function () {
