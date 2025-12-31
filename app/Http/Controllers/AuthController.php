@@ -37,12 +37,11 @@ class AuthController extends Controller
         ->get()
         ->filter(function ($faktur) {
             return in_array($faktur->status, ['Darurat', 'Dipantau']);
-        })
-        ->take(5);
+        });
+        
 
     $obats = Obat::all()
-        ->filter(fn ($o) => in_array($o->status, ['Darurat', 'Diperiksa']))
-        ->take(5);
+        ->filter(fn ($o) => in_array($o->status, ['Darurat', 'Diperiksa']));
 
     return view('dashboard', compact('fakturs', 'obats'));
     

@@ -13,10 +13,10 @@
     <table class="w-full text-sm text-left">
         <thead class="text-gray-500 border-b">
             <tr>
-                <th class="py-3">Nama Obat</th>
-                <th class="py-3">Stok</th>
-                <th class="py-3">Status</th>
-                <th class="py-3">Kadaluarsa</th>
+                <th class="px-4 py-3 text-center">Nama Obat</th>
+                <th class="px-4 py-3 text-center">Stok</th>
+                <th class="px-4 py-3 text-center">Status</th>
+                <th class="px-4 py-3 text-center">Kadaluarsa</th>
             </tr>
         </thead>
 
@@ -24,15 +24,15 @@
             @forelse ($obats as $obat)
                 <tr class="border-b last:border-none">
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         {{ $obat->nama_obat }}
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         {{ $obat->stok }}
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         <span class="px-3 py-1 rounded-full text-xs font-semibold
                             {{ $obat->status === 'Darurat'
                                 ? 'bg-red-100 text-red-600'
@@ -41,7 +41,7 @@
                         </span>
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         {{ \Carbon\Carbon::parse($obat->tanggal_kadaluarsa)
                             ->translatedFormat('d M Y') }}
                     </td>
@@ -69,28 +69,28 @@
     <table class="w-full text-sm text-left">
         <thead class="text-gray-500 border-b">
             <tr>
-                <th class="py-3">Kode Faktur</th>
-                <th class="py-3">Nama Distributor</th>
-                <th class="py-3">Tagihan</th>
-                <th class="py-3">Status</th>
-                <th class="py-3">Tanggal Jatuh Tempo</th>
+                <th class="px-4 py-3 text-center">Kode Faktur</th>
+                <th class="px-4 py-3 text-center">Nama Distributor</th>
+                <th class="px-4 py-3 text-center">Tagihan</th>
+                <th class="px-4 py-3 text-center">Status</th>
+                <th class="px-4 py-3 text-center">Tanggal Jatuh Tempo</th>
             </tr>
         </thead>
 
         <tbody>
             @forelse ($fakturs as $faktur)
                 <tr class="border-b last:border-none">
-                    <td class="py-3">{{ $faktur->id }}</td>
+                    <td class="px-4 py-3 text-center">{{ $faktur->id }}</td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         {{ $faktur->distributor->nama_distributor }}
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         Rp {{ number_format($faktur->tagihan, 0, ',', '.') }}
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         <span class="px-3 py-1 rounded-full text-xs font-semibold
                             {{ $faktur->status === 'Darurat'
                                 ? 'bg-red-100 text-red-600'
@@ -99,7 +99,7 @@
                         </span>
                     </td>
 
-                    <td class="py-3">
+                    <td class="px-4 py-3 text-center">
                         {{ \Carbon\Carbon::parse($faktur->tanggal_jatuh_tempo)
                             ->translatedFormat('d M Y') }}
                     </td>

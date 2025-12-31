@@ -20,47 +20,7 @@ return new class extends Migration
             $table->string('kontak');
             $table->timestamps();
         });
-
-        // 2. Memasukkan 5 Data Awal Langsung di Migration
-        DB::table('distributors')->insert([
-            [
-                'nama_distributor' => 'PT. Rajawali Nusindo',
-                'kontak' => '08123456789',
-                'alamat' => 'Bandung',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-              
-                'nama_distributor' => 'PT. Kimia Farma',
-                'kontak' => '08123456789',
-                'alamat' => 'Bandung',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama_distributor' => 'PT. Penta Valent',
-                'kontak' => '08123456789',
-                'alamat' => 'Bandung',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nama_distributor' => 'PT. Bina San Prima',
-                'kontak' => '08123456789',
-                'alamat' => 'Bandung',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                
-                'nama_distributor' => 'PT. Makmur Obat',
-                'kontak' => '081234576489',
-                'alamat' => 'jakarta',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        
     }
 
     /**
